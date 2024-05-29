@@ -37,15 +37,48 @@ export default function App() {
             <div className={step >= 2 ? "active" : ""}>2</div>
             <div className={step >= 2 ? "active" : ""}>3</div>
           </div>
-          ¨<p className="message">Steps{step}: {messages[step - 1]} </p>
+
+          {/* utilistaion du props children */}
+          <StepMessage Steps={step}>
+            {messages[step - 1]}
+          </StepMessage>
+
           <div className="buttons">
-            <button style={{ backgroundColor: '#7950f2', color: "#fff" }}
-              onClick={handlePrevious}>Previous</button>
-            <button style={{ backgroundColor: '#7950f2', color: "#fff" }}
-              onClick={handleNext}
-            >Next</button>
+            <Button bgcolor='#7950f2' colorText='#fff'
+              onclick={handlePrevious}><span>👈</span>Previous</Button>
+
+            <Button bgcolor='#7950f2' colorText='#fff'
+              onclick={handleNext}>Next <span>👉</span></Button>
           </div>
         </div >)}
+
+
     </>
   )
+}
+
+//la fonction qui gere le props children
+
+function StepMessage({ step, children }) {
+  return (
+    <div className="message">
+      <h3>Steps{step}</h3>
+      {children}
+    </div>
+  )
+}
+
+
+//la founctionqui gere le props children
+
+function Button({ bgcolor, colorText, onclick, children }) {
+  return (
+    <button
+      style={{
+        backgroundColor: bgcolor, color: colorText
+      }}
+      onClick={onclick}
+    >
+      {children}
+    </button>)
 }
